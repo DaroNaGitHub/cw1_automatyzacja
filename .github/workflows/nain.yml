@@ -1,1 +1,26 @@
 name: Przykład automatyzacji
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Sprawdź kod źródłowy
+              uses: actions/checkout@v2
+
+            - name: Ustaw środowisko Node.js
+              uses: actions/setup-node@v4
+              with:
+                node-version: '20'
+
+            - name: Zainstaluj zależności
+              run: npm install
+
+            - name: Uruchom testy
+              run: npm test
